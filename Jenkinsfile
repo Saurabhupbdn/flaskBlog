@@ -45,12 +45,10 @@ pipeline{
 
 	stages {
 	    
-	    stage('gitclone') {
-
-			stage('git clone') {
-            steps {
-              git branch: 'main', url: 'https://github.com/Saurabhupbdn/flaskBlog.git'
-            }
+	    stage('gitclone') {			 
+                      steps {
+                              git branch: 'main', url: 'https://github.com/Saurabhupbdn/flaskBlog.git'
+                            }
 		}
 
 		stage('Build') {
