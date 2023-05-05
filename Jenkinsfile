@@ -53,7 +53,7 @@ pipeline {
                       sh 'ocker push saurabhhbai/project2:latest'
                 }
             }
-        }
+        
   
          
     }
