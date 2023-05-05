@@ -39,18 +39,14 @@ pipeline{
 
 	agent any
 
-	environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-	}
+	 
 
-	stages {
-	    
-	    stage('gitclone') {			 
-                      steps {
-                              git branch: 'main', url: 'https://github.com/Saurabhupbdn/flaskBlog.git'
-                            }
-		}
-
+	stage('git clone') {
+            steps {
+              git branch: 'main', url: 'https://github.com/Saurabhupbdn/flaskBlog.git'
+            }
+    }
+	
 		stage('Build') {
 
 			steps {
