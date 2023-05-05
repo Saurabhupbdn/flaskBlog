@@ -1,14 +1,8 @@
- 
+
 
 pipeline {
     agent any
     stages {
-	    
-	 stage('Build image') {
-            steps {
-                 sh 'docker build -t saurabhbhai/project2:latest'
-            }
-	 }
     
 	 stage('git clone') {
             steps {
@@ -20,13 +14,15 @@ pipeline {
             steps{
 		    script{
 		    withCredentials([string(credentialsId: 'saurabhbhai', variable: 'dockerlogin')]) {
-			    sh 'docker login -u saurabhbhai -p${dockerlogin}  '
-                     }
-                  
+		       sh 'echo "your-password" | docker login -u saurabhbhai --password-stdin'
+			 sh 'docker build -t saurabhbhai/project2:latest'
+		    }
+                   
                       sh 'docker push saurabhhbai/project2:latest'
                 }
-	      }
             }
-         
+        
+  
+	 }        
     }
 }
