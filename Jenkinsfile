@@ -35,44 +35,26 @@
 //     }
 // }
 
-pipeline{
-
-	agent any
-
-	 
-
-	stage('git clone') {
+pipeline {
+    agent any
+    stages {
+    stage('git clone') {
             steps {
               git branch: 'main', url: 'https://github.com/Saurabhupbdn/flaskBlog.git'
             }
     }
-	
-		stage('Build') {
-
-			steps {
-				sh 'docker build -t saurabhbhai/project3:latest .'
-			}
-		}
-
-		stage('Login') {
-
-			steps {
-				sh 'docker login -u saurabhbhai -p Anuraghbhai'
-			}
-		}
-
-		stage('Push') {
-
-			steps {
-				sh 'docker push saurabhbhai/project3:latest'
-			}
-		}
-	
-
-	post {
-		always {
-			sh 'docker logout'
-		}
-	}
-
+         stage(' push image to hub'){
+            steps{
+               withCredentials([string(credentialsId: 'saurabhbhai', variable: 'dockerlogin')]) {
+                   sh 'docker login -u "saurabhbhai" -p "dockerlogin" '
+		   sh 'docker build -t saurabhbhai/project2:latest'
+}
+                   
+                      sh 'ocker push saurabhhbai/project2:latest'
+                }
+            }
+        }
+  
+         
+    }
 }
