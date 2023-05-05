@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Pull source code from GitHub') {
             steps {
-                git branch: 'main', url: 'https://github.com/saurabhubbdn/'
+                git branch: 'main', url: 'https://github.com/Saurabhupbdn/flaskBlog.git'
             }
         }
         
