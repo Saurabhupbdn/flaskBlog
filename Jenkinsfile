@@ -5,8 +5,7 @@ pipeline {
     stages {
     stage('git clone') {
             steps {
-              git branch: 'main', url: 'https://github.com/Saurabhupbdn/flaskBlog.git'
-            }
+              checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Saurabhupbdn/flaskBlog.git'], []])            }
     }
          stage(' push image to hub'){
             steps{
