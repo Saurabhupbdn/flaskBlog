@@ -3,9 +3,9 @@ pipeline {
     
     environment {
         DOCKER_REGISTRY = 'https://index.docker.io/v1/'
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
+        DOCKER_HUB_CREDENTIALS = credentials('dockerhub')
         DOCKER_IMAGE_NAME = 'saurabhbhai/$JOB_NAME'
-        DOCKER_IMAGE_VERSION = 'v1.' + env.BUILD_ID
+        DOCKER_IMAGE_VERSION = 'v1.' + 'env.BUILD_ID'
         DOCKER_IMAGE_LATEST_TAG = 'latest'
     }
     
