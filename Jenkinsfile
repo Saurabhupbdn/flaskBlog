@@ -14,7 +14,7 @@ pipeline {
             steps{
 		    script{
 		    withCredentials([string(credentialsId: 'saurabhbhai', variable: 'dockerlogin')]) {
-		       sh 'echo "your-password" | docker login -u saurabhbhai --password-stdin'
+			 sh 'docker login -u saurabhbhai -p ${dockerlogin}'
 			 sh 'docker build -t saurabhbhai/project2:latest'
 		    }
                    
