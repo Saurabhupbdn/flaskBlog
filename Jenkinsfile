@@ -67,7 +67,7 @@ pipeline{
 				sh 'docker push saurabhbhai/project3:latest'
 			}
 		}
-	}
+	
 
 	post {
 		always {
