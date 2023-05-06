@@ -23,5 +23,12 @@ pipeline {
                 }
             }
         }
+        stage('K8s deploy') {
+            steps {
+                kubeconfig(caCertificate: '/home/knoldus/.minikube/ca.crt', credentialsId: 'minikube-config', serverUrl: 'https://192.168.49.2:8443') {
+                    sh 'kubectl create -f deploy.yml .'
+                }
+            }
+        }
     }
 }
