@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: BlogWebApp
+  name: service
 spec:
   selector:
     app: bloggingApp
@@ -16,7 +16,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bloggingApp
+  name: deploy
 spec:
   selector:
     matchLabels:
