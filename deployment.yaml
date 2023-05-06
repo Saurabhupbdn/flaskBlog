@@ -1,0 +1,21 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: deploy
+spec:
+  selector:
+    matchLabels:
+      app: blogwebapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: blogwebapp
+    spec:
+      containers:
+      - name: blogwebapp
+        image: saurabhbhai/project2
+        ports:
+        - name: http
+          containerPort: 5000
