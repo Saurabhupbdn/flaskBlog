@@ -5,7 +5,7 @@ metadata:
   name: service
 spec:
   selector:
-    app: bloggingApp
+    app: blogwebapp
   type: NodePort
   ports:
   - protocol: TCP
