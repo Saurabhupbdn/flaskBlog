@@ -1,30 +1,34 @@
-
 pipeline {
     agent any
-    stages {
-    
-	 stage('git clone') {
-            steps {
-              git branch: 'main', url: 'https://github.com/Saurabhupbdn/flaskBlog.git'
-            }
-    }    
-	 
-         stage(' push image to hub'){
+    stages{
+        stage('Build the docker image'){
             steps{
-		    script{
-		    withCredentials([string(credentialsId: 'saurabhbhai', variable: 'dockerlogin')]) {
-		       sh 'echo "your-password" | docker login -u saurabhbhai --password-stdin'
+                script{
+                     sh 'docker build -t saurabhbhai/project2 .'
 
-
-		       sh 'docker build -t saurabhbhai/project2:latest'
-		    }
-}
-                   
-                      sh 'docker push saurabhhbai/project2:latest'
+                }
+        }
+        }
+        stage('push the docker image to the dockerhub'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerlogin')]) {
+                              sh 'docker login -u saurabhbhai -p ${dockerlogin}'
+                             
+                      }
+                      
+                              sh 'docker push saurabhbhai/project2:latest '
                 }
             }
-        
-  
-         
+        }
+        stage('K8s deploy') {
+            steps {
+                kubeconfig(caCertificate: '/home/knoldus/.minikube/ca.crt', credentialsId: 'minikube-config', serverUrl: 'https://192.168.49.2:8443') {
+                    sh 'kubectl apply -f deployment.yaml'
+                    sh 'kubectl apply -f service.yaml'
+                }
+            }
+        }
+       
     }
 }
