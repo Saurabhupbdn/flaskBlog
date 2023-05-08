@@ -1,6 +1,15 @@
 pipeline {
     agent any
     stages{
+        stage('Generate Artifact'){
+            steps{
+                script{
+                    sh '''
+                        tar -cf flaskapp.tar ./
+                       '''
+     }
+    }
+  }
         stage('Build the docker image'){
             steps{
                 script{
@@ -21,14 +30,14 @@ pipeline {
                 }
             }
         }
-//         stage('K8s deploy') {
-//             steps {
-//                 kubeconfig(caCertificate: '/home/knoldus/.minikube/ca.crt', credentialsId: 'minikube-config', serverUrl: 'https://192.168.49.2:8443') {
-//                     sh 'kubectl apply -f deployment.yaml'
-//                     sh 'kubectl apply -f service.yaml'
-//                 }
-//             }
-//         }
+         stage('K8s deploy') {
+             steps {
+                 kubeconfig(caCertificate: '/home/knoldus/.minikube/ca.crt', credentialsId: 'minikube-config', serverUrl: 'https://192.168.49.2:8443') {
+                     sh 'kubectl apply -f deployment.yaml'
+                     sh 'kubectl apply -f service.yaml'
+                 }
+             }
+         }
        
     }
 }
