@@ -3,7 +3,7 @@ FROM python:3 AS build
 WORKDIR /app
 COPY . /app
 RUN pip install Flask==2.2.2 
-Run pip install passlib==1.7.4 
+RUN pip install passlib==1.7.4 
 RUN pip install WTForms==3.0.1 
 RUN pip install flaskwebgui==1.0.3
 
