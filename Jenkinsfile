@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages{
-        stage('Generate Artifact'){
+        stage('Generate the Artifact'){
             steps{
                 script{
                     sh '''
