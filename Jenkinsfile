@@ -13,7 +13,7 @@ pipeline {
         stage('Build the docker image'){
             steps{
                 script{
-                    sh 'docker build -t saurabhbhai/project2 .'
+                    sh 'docker build -t saurabhbhai/project3 .'
 
                 }
         }
@@ -26,7 +26,7 @@ pipeline {
                              
                       }
                       
-                    sh 'docker push saurabhbhai/project2 '
+                    sh 'docker push saurabhbhai/project3 '
                 }
             }
         }
