@@ -2,12 +2,12 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: deploy
+  name: deployApplication
 spec:
   selector:
     matchLabels:
       app: blogwebapp
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
