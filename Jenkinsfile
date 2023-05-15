@@ -13,7 +13,7 @@ pipeline {
         stage('Build the docker image'){
             steps{
                 script{
-                    sh 'docker build -t saurabhbhai/project3 .'
+                    sh 'docker build -t saurabhbhai/project3:v.${BUILD_NUMBER} .'
 
                 }
         }
@@ -26,7 +26,7 @@ pipeline {
                              
                       }
                       
-                    sh 'docker push saurabhbhai/project3 '
+                    sh 'docker push saurabhbhai/project3:v.${BUILD_NUMBER} '
                 }
             }
         }
@@ -35,6 +35,7 @@ pipeline {
                  kubeconfig(caCertificate: '/home/knoldus/.minikube/ca.crt', credentialsId: 'minikube-config', serverUrl: 'https://192.168.49.2:8443') {
                      sh 'kubectl apply -f deployment.yaml'
                      sh 'kubectl apply -f service.yaml'
+                     sh 'kubectl set image deployment/
                  }
              }
          }
